@@ -6,6 +6,7 @@ import static spark.Spark.*;
 import java.util.Random;
 
 public class Contact {
+  public static ArrayList<Phone> contacts = new ArrayList<Phone>();
   private String mFirstName;
   private String mLastName;
 
@@ -25,5 +26,10 @@ public class Contact {
   public String getLastName() {
     return mLastName;
   }
+  //
+  // public String getName() {
+  //   String name = "firstname" + "lastname";
+  //   return name;
+  // }
 
 }
