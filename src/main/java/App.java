@@ -8,23 +8,27 @@ public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
-    Hangman bob = new Hangman();
-
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      String word = Hangman.generateWord();
-      //request.session().attribute("word", word);
-      model.put("word", word);
-      model.put("bob", bob);
 
+      String firstname = request.queryParams("firstname");
       String lastname = request.queryParams("lastname");
-      model.put("letter", letter);
 
-      model.put("template", "templates/hangman_form.vtl");
+      request.session().attribute("firstname", firstname);
+      request.session().attribute("lastname", lastname);
+
+      model.put("firstname", firstname);
+      model.put("lastname", lastname);
+
+      Contact newContact = new Contact(firstname, lastname);
+      model.put("newContact", newContact);
+
+      model.put("template", "templates/contact_form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-  //
+
+
   //
   //
   //
