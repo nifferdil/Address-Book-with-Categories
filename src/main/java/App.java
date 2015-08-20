@@ -3,6 +3,7 @@ import java.util.Random;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+import java.util.ArrayList;
 
 public class App {
   public static void main(String[] args) {
@@ -11,26 +12,49 @@ public class App {
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("contacts", request.session().attribute("contacts"));
 
       model.put("template", "templates/contact_form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/contacts", (request, response) -> {
+
+
+    post("/contacts", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
-      String firstname = request.queryParams("firstname");
-      String lastname = request.queryParams("lastname");
+      ArrayList<Contact> contacts = request.session().attribute("contacts");
 
-      model.put("firstname", request.session().attribute("firstname"));
-      model.put("lastname", request.session().attribute("lastname"));
+      if (contacts == null) {
+        contacts = new ArrayList<Contact>();
+        request.session().attribute("contacts", contacts);
+      }
 
-      Contact newContact = new Contact(firstname, lastname);
-      model.put("newContact", newContact);
+      String fullname = request.queryParams("fullname");
+      Contact newContact = new Contact(fullname);
+      request.session().attribute("contact", newContact);
 
-      model.put("template", "templates/contacts.vtl");
+      contacts.add(newContact);
+
+      model.put("template", "templates/success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+
+
+    // post("/tasks", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //
+    //
+    //
+    //   model.put("template", "templates/success.vtl");
+    //   return new ModelAndView(model, layout);
+    //  }, new VelocityTemplateEngine());
+
+
+
+
+
 }//End of main
 
 

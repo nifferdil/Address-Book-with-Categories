@@ -2,18 +2,23 @@
   <head>
     <h1>Address Book</h1>
 
+    <p>Contact List:</p>
+
+    <ul>
+    #foreach ($contact in $contacts)
+      <li>$contact.getName()</li>
+    #end
+    </ul>
+
   </head>
   <div>
-  <form action='/contacts' method='get'>
+  <form action='/contacts' method='post'>
   <body>
 
     <p>Enter a first and last name for your contact</p>
-      <label for="firstname">Enter a first name</label>
-      <input id="firstname" name="firstname" type="text">
+      <label for="fullname">Contact name</label>
+      <input id="fullname" name="fullname" type="text">
       <br>
-      <br>
-      <label for="lastname">Enter a last name</label>
-      <input id="lastname" name="lastname" type="text">
       <br>
       <button type="submit" class="btn btn-info">Save Name</button>
 </div>

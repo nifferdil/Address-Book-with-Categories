@@ -5,9 +5,7 @@ public class ContactTest {
 
 @Test
   public void newContact_instantiatesCorrectly() {
-    Contact testContact = new Contact("Jane", "Doe");
-    String firstName = "Jane";
-    String lastName = "Doe";
-    assertEquals(true, testContact instanceof Contact);
+    Contact newContact = new Contact("Jane Doe");
+    assertEquals("Jane Doe", newContact.getName());
   }
 }
