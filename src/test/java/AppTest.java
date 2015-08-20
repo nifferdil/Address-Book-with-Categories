@@ -26,31 +26,32 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-  public void taskIsCreatedTest() {
+  public void contactIsDisplayedTest() {
     goTo("http://localhost:4567/");
     fill("#fullname").with("Jane Doe");
-    submit(".btn");
-    assertThat(pageSource()).contains("Your contact has been saved.");
-
-  @Test
-  public void taskIsDisplayedTest() {
-    goTo("http://localhost:4567/");
-    fill("#description").with("Jane Doe");
     submit(".btn");
     click("a", withText("Go Back"));
     assertThat(pageSource()).contains("Jane Doe");
   }
 
   @Test
-  public void multipleTasksAreDisplayedTest() {
+  public void multipleContactsAreDisplayedTest() {
     goTo("http://localhost:4567/");
-    fill("#description").with("Jane Doe");
+    fill("#fullname").with("Jane Doe");
     submit(".btn");
     click("a", withText("Go Back"));
-    fill("#description").with("John Doeh");
+    fill("#fullname").with("John Doeh");
     submit(".btn");
     click("a", withText("Go Back"));
     assertThat(pageSource()).contains("Jane Doe");
     assertThat(pageSource()).contains("John Doeh");
+  }
 
+  @Test
+  public void contactIsCreatedTest() {
+    goTo("http://localhost:4567/");
+    fill("#fullname").with("Jane Doe");
+    submit(".btn");
+    assertThat(pageSource()).contains("Your contact has been saved.");
+  }
 }
