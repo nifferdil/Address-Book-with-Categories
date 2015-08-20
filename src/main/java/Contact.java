@@ -6,8 +6,9 @@ import static spark.Spark.*;
 import java.util.Random;
 
 public class Contact {
-  //public static ArrayList<Phone> contacts = new ArrayList<Phone>();
+
   private String mFullname;
+  private int mId;
 
   public Contact(String fullname) {
     mFullname = fullname;
@@ -18,7 +19,24 @@ public class Contact {
     return mFullname;
   }
 
+  public int getId() {
+   return mId;
+ }
 
+ public static ArrayList<Contact> all() {
+     return contacts;
+   }
 
+ public static Contact find(int id) {
+ try {
+   return contacts.get(id - 1);
+ } catch (IndexOutOfBoundsException e) {
+   return null;
+ }
+}
+
+public static void clear() {
+  contacts.clear();
+}
 
 }
