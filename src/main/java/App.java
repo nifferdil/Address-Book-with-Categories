@@ -15,11 +15,8 @@ public class App {
       String firstname = request.queryParams("firstname");
       String lastname = request.queryParams("lastname");
 
-      request.session().attribute("firstname", firstname);
-      request.session().attribute("lastname", lastname);
-
-      model.put("firstname", firstname);
-      model.put("lastname", lastname);
+      model.put("firstname", request.session().attribute("firstname"));
+      model.put("lastname", request.session().attribute("lastname"));
 
       Contact newContact = new Contact(firstname, lastname);
       model.put("newContact", newContact);
