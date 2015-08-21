@@ -4,14 +4,20 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Contact {
+
+  private static ArrayList<Contact> contacts = new ArrayList<Contact>();
+
 
   private String mFullname;
   private int mId;
 
   public Contact(String fullname) {
     mFullname = fullname;
+    contacts.add(this);
+    mId = contacts.size();
 
   }
 

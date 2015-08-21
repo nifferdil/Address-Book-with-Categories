@@ -2,8 +2,15 @@
   <head>
     <h1>Address Book</h1>
 
-  </head>
+    <h1> All contacts </h1>
+    <ul>
+    #foreach ($contact in $contacts)
+      <a href="/contacts/$contact.getId()">$contact.getName()</a>
+    #end
+    </ul>
 
-    <p><h3>Your contact's name is: $newContact.getName()</h3></p>
+  <a href="/contacts/new">Add another task</a>
+
+  </head>
   </body>
 </html>

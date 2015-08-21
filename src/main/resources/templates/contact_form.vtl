@@ -2,17 +2,11 @@
   <head>
     <h1>Address Book</h1>
 
-    <p>Contact List:</p>
-
-    <ul>
-    #foreach ($contact in $contacts)
-      <li><$contact.getName()</li>
-    #end
-    </ul>
+    <p>Add a new contact:</p>
 
   </head>
   <div>
-  <form action='/contacts' method='post'>
+  <form action='/contact' method='post'>
   <body>
 
     <p>Enter a first and last name for your contact</p>

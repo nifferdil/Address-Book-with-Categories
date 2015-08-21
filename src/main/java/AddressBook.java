@@ -4,13 +4,14 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class AddressBook {
-  private ArrayList<Contact> contacts = new ArrayList<Contact>();
+  private ArrayList<Contact> mContacts;
 
 
   public AddressBook() {
-    mContacts = contacts;
+    mContacts = new ArrayList<Contact>();
   }
 
 

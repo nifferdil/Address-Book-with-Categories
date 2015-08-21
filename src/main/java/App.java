@@ -17,38 +17,42 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/contacts", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("contacts", Contact.all());
+      model.put("template", "templates/contacts.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+    get("contacts/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/contact_form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+    get("/contacts/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Contact contact = Contact.find(Integer.parseInt(request.params(":id")));
+      model.put("contact", contact);
+      model.put("template", "templates/task.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
     post("/contacts", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-
-      ArrayList<Contact> contacts = request.session().attribute("contacts");
-
-      if (contacts == null) {
-        contacts = new ArrayList<Contact>();
-        request.session().attribute("contacts", contacts);
-      }
-
       String fullname = request.queryParams("fullname");
       Contact newContact = new Contact(fullname);
-      request.session().attribute("contact", newContact);
-
-      contacts.add(newContact);
-
       model.put("template", "templates/success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
 
 
-    // post("/tasks", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //
-    //
-    //
-    //   model.put("template", "templates/success.vtl");
-    //   return new ModelAndView(model, layout);
-    //  }, new VelocityTemplateEngine());
+
 
 
 
